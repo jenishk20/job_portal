@@ -31,7 +31,17 @@ Route::get('/admin/review',[\App\Http\Controllers\AdminController::class,'review
 Route::post('/admin/review/confirm',[\App\Http\Controllers\AdminController::class,'confirm']);
 
 
+
+Route::get('/changepass',[\App\Http\Controllers\HomeController::class,'changePassForm']);
+Route::post('/changepass',[\App\Http\Controllers\HomeController::class,'changePassword']);
+
+
+
+
+
+
 //Student Routes
+
 Route::get('/student/oncampus',[\App\Http\Controllers\StudentController::class,'show']);
 Route::get('/student/profile',[\App\Http\Controllers\StudentController::class,'show1']);
-
+Route::get('/student/oncampus/{id}',[\App\Http\Controllers\StudentController::class,'preview']);

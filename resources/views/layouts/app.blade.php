@@ -100,6 +100,11 @@
 
                                     {{ __("Make Profile") }}
                                 </a>
+
+                                <a class="dropdown-item" href="{{url('/changepass')}}">
+
+                                    {{ __("Change Password") }}
+                                </a>
                             </div>
 
                         </li>

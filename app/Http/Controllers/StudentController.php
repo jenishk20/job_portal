@@ -130,5 +130,9 @@ class StudentController extends Controller
         else
             return view('student.status',compact('sql'));
     }
+    public function preview($id)
+    {
 
+        return view('student.preview',compact('id'));
+    }
 }

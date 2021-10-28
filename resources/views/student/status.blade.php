@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header font-weight-bold">Congratulations  {{$sql[0]->first_name}}, You have already created your profile</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -35,9 +35,9 @@
                                 <td>{{$sql[0]->first_name}}</td>
                                 <td>{{$sql[0]->last_name}}</td>
                                 @if($sql[0]->status=='Pending')
-                                    <td class="btn btn-primary btn-danger">{{$sql[0]->status}}</td>
+                                    <td class="text-danger">{{$sql[0]->status}}</td>
                                 @else
-                                    <td class="btn btn-primary btn-success">{{$sql[0]->status}}</td>
+                                    <td class=" text-success">{{$sql[0]->status}}</td>
                                 @endif
                             </tr>
 

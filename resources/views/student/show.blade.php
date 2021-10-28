@@ -26,22 +26,37 @@
                     <td>{{$companies[$i]->CTC}}</td>
                     <td>{{$companies[$i]->minimum_CGPA}}</td>
                     <td>
-                        {{--                        <iframe--}}
-                        {{--                            src="http://docs.google.com/gview?url={{asset($companies[$i]->job_description) }}&embedded=true"--}}
-                        {{--                            style="width:300px; height:200px;"--}}
-                        {{--                            frameborder="0">--}}
-                        {{--                        </iframe>--}}
+{{--                                            {{var_dump($companies[$i]->job_description)}}--}}
 
-                        {{--                        <iframe--}}
-                        {{--                            src="http://docs.google.com/gview?url={{asset($companies[$i]->job_description) }}&embedded=true"--}}
-                        {{--                            style="width:100px; height:100px;"--}}
-                        {{--                            frameborder="0">--}}
-                        {{--                        </iframe>--}}
 
-                        <iframe
-                            src="/assets/{{$companies[$i]->job_description}}">
+{{--                        <iframe style="width:1350px; height:1000px;"--}}
+{{--                                src="/assets/{{$companies[$i]->job_description}}">--}}
+{{--                        </iframe>--}}
 
-                        </iframe>
+
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                                data-target="#myModal{{$i}}">Preview
+                        </button>
+
+                        <div id="myModal{{$i}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+
+                                <div class="modal-content">
+                                    <div class="modal-body">
+{{--                                        {{var_dump(  $companies[$i]->job_description)}}--}}
+                                        <embed src="/assets/{{$companies[$i]->job_description}}" frameborder="0"
+                                               width="100%" height="400px">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
 
                     </td>
