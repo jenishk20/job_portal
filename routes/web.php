@@ -45,3 +45,4 @@ Route::post('/changepass',[\App\Http\Controllers\HomeController::class,'changePa
 Route::get('/student/oncampus',[\App\Http\Controllers\StudentController::class,'show']);
 Route::get('/student/profile',[\App\Http\Controllers\StudentController::class,'show1']);
 Route::get('/student/oncampus/{id}',[\App\Http\Controllers\StudentController::class,'preview']);
+Route::post('/student/profile/confirm',[\App\Http\Controllers\StudentController::class,'index']);
