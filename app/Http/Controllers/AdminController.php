@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail1;
 use App\Models\Company;
 use App\Models\Student;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -84,6 +86,8 @@ class AdminController extends Controller
 
         $sql[0]->status='Done';
         $sql[0]->save();
+
+        Mail::send(new ContactMail1($request));
         return back()->with('success','Verification Done');
     }
 

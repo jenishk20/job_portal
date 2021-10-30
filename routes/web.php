@@ -1,6 +1,11 @@
 <?php
 
+
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,17 +28,34 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //Admin Routes
-Route::get('/admin',[\App\Http\Controllers\AdminController::class,'index']);
-Route::get('/admin/addCompany',[\App\Http\Controllers\AdminController::class,'addCompany']);
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index']);
+Route::get('/admin/addCompany', [\App\Http\Controllers\AdminController::class, 'addCompany']);
 
-Route::post('/admin/addCompany/confirm',[\App\Http\Controllers\AdminController::class,'confirmCompany']);
-Route::get('/admin/review',[\App\Http\Controllers\AdminController::class,'review']);
-Route::post('/admin/review/confirm',[\App\Http\Controllers\AdminController::class,'confirm']);
+Route::post('/admin/addCompany/confirm', [\App\Http\Controllers\AdminController::class, 'confirmCompany']);
+Route::get('/admin/review', [\App\Http\Controllers\AdminController::class, 'review']);
+Route::post('/admin/review/confirm', [\App\Http\Controllers\AdminController::class, 'confirm']);
 
 
+Route::get('/changepass', [\App\Http\Controllers\HomeController::class, 'changePassForm']);
+Route::post('/changepass', [\App\Http\Controllers\HomeController::class, 'changePassword']);
 
-Route::get('/changepass',[\App\Http\Controllers\HomeController::class,'changePassForm']);
-Route::post('/changepass',[\App\Http\Controllers\HomeController::class,'changePassword']);
+
+//Contact Form
+
+
+Route::get(
+    '/contact',
+    function () {
+        return view('contact');
+    }
+);
+Route::post(
+    '/contact',
+    function (Request $request) {
+        Mail::send(new ContactMail($request));
+        return view('contact')->with('message', 'We have received your response, Thank You for your feedback.');
+    }
+);
 
 
 
@@ -42,6 +64,7 @@ Route::post('/changepass',[\App\Http\Controllers\HomeController::class,'changePa
 
 //Student Routes
 
-Route::get('/student/oncampus',[\App\Http\Controllers\StudentController::class,'show']);
-Route::get('/student/profile',[\App\Http\Controllers\StudentController::class,'show1']);
-Route::get('/student/oncampus/{id}',[\App\Http\Controllers\StudentController::class,'preview']);
+Route::get('/student/oncampus', [\App\Http\Controllers\StudentController::class, 'show']);
+Route::get('/student/profile', [\App\Http\Controllers\StudentController::class, 'show1']);
+Route::post('/student/profile/confirm', [\App\Http\Controllers\StudentController::class, 'index']);
+Route::get('/student/oncampus/{id}', [\App\Http\Controllers\StudentController::class, 'preview']);

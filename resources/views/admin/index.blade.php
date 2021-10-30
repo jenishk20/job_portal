@@ -7,13 +7,15 @@
                 <h3>Hello Admin</h3>
             </div>
             <div class="card-body">
-                Welcome to Railway Reservation System
+                Welcome to the admin page
+
 
                 <div>
-                    As an admin, you can add Trains , Stations and Trips of Trains
+                    As an admin, you can add Companies, Users, and Jobs.
                 </div>
             </div>
         </div>
+
     </div>
 
 @endsection

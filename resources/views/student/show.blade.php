@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container mt-5">
-        <table class="table table-striped table-hover text-dark" style="font-size:large">
+    <div class="container mt-4">
+        <table class="table table-striped table-hover text-dark" style="font-size:medium">
             <thead>
             <tr>
 
-                <th scope="col">#</th>
+                <th scope="col">No.</th>
                 <th scope="col">Company</th>
                 <th scope="col">Role</th>
                 <th scope="col">Branches</th>

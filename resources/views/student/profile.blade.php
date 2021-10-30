@@ -216,8 +216,8 @@
 
         .radio {
             display: inline-block;
-            width: 204;
-            height: 104;
+            width: 204px;
+            height: 104px;
             border-radius: 0;
             background: lightblue;
             box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
@@ -329,10 +329,10 @@
                                                     <option style="font-family: FontAwesome;">IT</option>
                                                     <option style="font-family: FontAwesome;">ECE</option>
                                                     <option style="font-family: FontAwesome;">IC</option>
-                                                    <option style="font-family: FontAwesome;">EEE</option>
-                                                    <option style="font-family: FontAwesome;">MECH</option>
-                                                    <option style="font-family: FontAwesome;">CIVIL</option>
-                                                    <option style="font-family: FontAwesome;">CHEMICAL</option>
+                                                    <option style="font-family: FontAwesome;">EE</option>
+                                                    <option style="font-family: FontAwesome;">ME</option>
+                                                    <option style="font-family: FontAwesome;">CL</option>
+                                                    <option style="font-family: FontAwesome;">CH</option>
                                                 </select>
                                             </div>
                                         </div>
