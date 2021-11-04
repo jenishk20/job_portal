@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMail1;
+use App\Models\applications;
 use App\Models\Company;
 use App\Models\Student;
 use Illuminate\Foundation\Auth\User;
@@ -90,6 +91,39 @@ class AdminController extends Controller
         Mail::send(new ContactMail1($request));
         return back()->with('success','Verification Done');
     }
+    public function application()
+    {
+        $company=Company::query()->select()->get();
+        $students=applications::query()->select()->get();
+        $profile=Student::query()->select()->get();
 
+        $roles=[];
+        $companies=[];
+        $uroles=[];
+        $ucompanies=[];
+        for($i=0;$i<count($company);$i++)
+        {
+            array_push($roles,$company[$i]->job_role);
+            array_push($companies,$company[$i]->company_name);
+
+        }
+        $ucompanies=array_unique($companies);
+        $uroles=array_unique($roles);
+        //dd($ucompanies,$uroles);
+        return view('admin.applicants',compact('ucompanies','uroles','students'));
+    }
+    public function applicants(Request $request)
+    {
+
+
+        $cn=$request->get('cn');
+        $jr=$request->input('jr');
+
+        $students=applications::query()->select()->where('company_name','=',$cn)->
+            where('job_role','=',$jr)->get();
+        dd($students);
+        return view('admin.showapplicants',compact('students'));
+
+    }
 
 }

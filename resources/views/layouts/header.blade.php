@@ -31,6 +31,10 @@
                         <a class="nav-link" href="{{url('/admin/review')}}">Pending Reviews</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/admin/applicants')}}">Applications</a>
+                    </li>
+
 
                 </ul>
             </div>

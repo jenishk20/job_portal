@@ -51,7 +51,7 @@ class CreateStudentsTable extends Migration
             $table->string('terms');
             $table->string('status');
 
-
+            $table->string('attempts');
 
 
 

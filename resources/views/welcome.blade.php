@@ -574,7 +574,7 @@
 <!-- Navbar -->
 <div class="w3-top">
     @if (Route::has('login'))
-        <div class="w3-bar w3-white w3-card">
+        <div class="w3-bar w3-white  d-inline w3-card">
             @auth
                 <a href="{{ url('/home') }}" class="w3-bar-item w3-button w3-padding-large">HOME</a>
             @else
