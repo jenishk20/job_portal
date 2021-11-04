@@ -73,7 +73,12 @@
                         </td>
                         <td>
                             {{--                            {{dd($app[0]->status)}}--}}
-                            @if($applied[$i])
+                            @if($students->isEmpty())
+                                <button type="submit" class="btn btn-info"
+                                        disabled>Make Profile First
+                                </button>
+
+                            @elseif($applied[$i])
                                 <button type="submit" class="btn btn-info"
                                         disabled>You have applied
                                 </button>

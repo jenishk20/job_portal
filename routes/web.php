@@ -74,3 +74,7 @@ Route::post('/student/profile/confirm', [\App\Http\Controllers\StudentController
 Route::get('/student/oncampus/{id}', [\App\Http\Controllers\StudentController::class, 'preview']);
 
 Route::post('/student/oncampus/apply/{id}',[\App\Http\Controllers\StudentController::class,'apply']);
+
+
+
+Route::post('/admin/applicants/update',[\App\Http\Controllers\AdminController::class,'dd']);

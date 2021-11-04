@@ -114,6 +114,11 @@ class StudentController extends Controller
     {
         $companies = Company::query()->select()->get();
         $user = auth()->user();
+        $students=Student::query()->select()->where('primary_mail_id','=',$user->email)->get();
+//        if($students->isEmpty())
+//        {
+//            return view('student.profile');
+//        }
         $applied = [];
         for ($i = 0; $i < count($companies); $i++) {
             $app = applications::query()->select()->where('rollno', '=', $user->email)->
@@ -127,7 +132,7 @@ class StudentController extends Controller
         //dd($applied);
 //        $app=applications::query()->select()->where('rollno','=',$user->email)->
 //        where('company_name','=',$companies[0]->company_name)->get();
-        return view('student.show', compact('companies', 'applied'));
+        return view('student.show', compact('companies', 'applied','students'));
     }
 
     public function show1()

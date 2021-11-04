@@ -65,65 +65,86 @@ class AdminController extends Controller
 
     public function review()
     {
-        $sql=Student::query()->select()->where('status','=','Pending')->get();
+        $sql = Student::query()->select()->where('status', '=', 'Pending')->get();
 
         //dd($sql);
-        if($sql->isEmpty())
-        {
-            return view('admin.reviews',compact('sql'));
-        }
-        else
-        {
-            return view('admin.reviews',compact('sql'));
+        if ($sql->isEmpty()) {
+            return view('admin.reviews', compact('sql'));
+        } else {
+            return view('admin.reviews', compact('sql'));
         }
 
     }
+
     public function confirm(Request $request)
     {
 
 
-        $sql=Student::query()->select()->where('id','=',$request->submit)->get();
+        $sql = Student::query()->select()->where('id', '=', $request->submit)->get();
 
 
-        $sql[0]->status='Done';
+        $sql[0]->status = 'Done';
         $sql[0]->save();
 
         Mail::send(new ContactMail1($request));
-        return back()->with('success','Verification Done');
+        return back()->with('success', 'Verification Done');
     }
+
     public function application()
     {
-        $company=Company::query()->select()->get();
-        $students=applications::query()->select()->get();
-        $profile=Student::query()->select()->get();
+        $company = Company::query()->select()->get();
+        $students = applications::query()->select()->get();
+        $user = auth()->user();
+        $profile = Student::query()->select()->get();
 
-        $roles=[];
-        $companies=[];
-        $uroles=[];
-        $ucompanies=[];
-        for($i=0;$i<count($company);$i++)
-        {
-            array_push($roles,$company[$i]->job_role);
-            array_push($companies,$company[$i]->company_name);
+        //dd($profile);
+        $roles = [];
+        $companies = [];
+        $uroles = [];
+        $ucompanies = [];
+        for ($i = 0; $i < count($company); $i++) {
+            array_push($roles, $company[$i]->job_role);
+            array_push($companies, $company[$i]->company_name);
 
         }
-        $ucompanies=array_unique($companies);
-        $uroles=array_unique($roles);
+        $ucompanies = array_unique($companies);
+        $uroles = array_unique($roles);
         //dd($ucompanies,$uroles);
-        return view('admin.applicants',compact('ucompanies','uroles','students'));
+        return view('admin.applicants', compact('ucompanies', 'uroles', 'students', 'profile'));
     }
+
     public function applicants(Request $request)
     {
 
 
-        $cn=$request->get('cn');
-        $jr=$request->input('jr');
+        $cn = $request->get('cn');
+        $jr = $request->input('jr');
 
-        $students=applications::query()->select()->where('company_name','=',$cn)->
-            where('job_role','=',$jr)->get();
+        $students = applications::query()->select()->where('company_name', '=', $cn)->
+        where('job_role', '=', $jr)->get();
         dd($students);
-        return view('admin.showapplicants',compact('students'));
+        return view('admin.showapplicants', compact('students'));
 
     }
 
+    public function dd(Request $request)
+    {
+        $sec=$request->get('select');
+        $rej=$request->get('reject');
+
+       if($sec)
+       {
+           $app=applications::query()->select()->where('id','=',$sec)->get();
+           $app[0]->status='Selected';
+           $app[0]->save();
+           return back()->with('success', 'Updated');
+       }
+       else
+       {
+           $app=applications::query()->select()->where('id','=',$rej)->get();
+           $app[0]->status='Rejected';
+           $app[0]->save();
+           return back()->with('success', 'Updated');
+       }
+    }
 }

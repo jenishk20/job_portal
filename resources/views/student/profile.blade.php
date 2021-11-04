@@ -239,9 +239,6 @@
             object-fit: cover
         }
     </style>
-{{--    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>--}}
-{{--    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>--}}
-{{--    <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script>--}}
     </head>
 
     <body oncontextmenu='return false' class='snippet-body'>
@@ -256,8 +253,8 @@
                         <div class="col-md-12 mx-0">
                             <form id="msform" method="post" enctype="multipart/form-data"
                                   action="/student/profile/confirm">
-                                @csrf
-                                <!-- progressbar -->
+                            @csrf
+                            <!-- progressbar -->
                                 <ul id="progressbar">
                                     <li class="active" id="account"><strong>Account</strong></li>
                                     <li id="personal"><strong>Education</strong></li>
@@ -285,7 +282,8 @@
                                         <br>
 
                                         <input type="email" name="Pemail" id="Pemail"
-                                               value="{{auth()->user()->email}}" placeholder="Primary Email Id" disabled />
+                                               value="{{auth()->user()->email}}" placeholder="Primary Email Id"
+                                               disabled/>
                                         <input type="email" name="Semail" id="Semail"
                                                placeholder="Secondary Email Id"/>
                                         <input type="tel" name="Wnumber" id="Wnumber" placeholder="Whatsapp Number"/>
@@ -372,7 +370,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="number" name="sem1spi" id="sem1spi"
-                                                       onchange="func(this.value,'sem1per');" placeholder="Semester 1 SPI"/>
+                                                       onchange="func(this.value,'sem1per');"
+                                                       placeholder="Semester 1 SPI"/>
                                             </div>
                                             <div class="col-6">
                                                 <input type="number" name="sem1per" id="sem1per"
@@ -382,7 +381,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <input type="number" name="sem2spi" id="sem2spi" onchange="func(this.value,'sem2per');"
+                                                <input type="number" name="sem2spi" id="sem2spi"
+                                                       onchange="func(this.value,'sem2per');"
                                                        placeholder="Semester 2 SPI"/>
                                             </div>
                                             <div class="col-6">
@@ -394,7 +394,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="number" name="sem3spi" id="sem3spi"
-                                                       onchange="func(this.value,'sem3per');" placeholder="Semester 3 SPI"/>
+                                                       onchange="func(this.value,'sem3per');"
+                                                       placeholder="Semester 3 SPI"/>
                                             </div>
                                             <div class="col-6">
                                                 <input type="number" name="sem3per" id="sem3per"
@@ -405,7 +406,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="number" name="sem4spi" id="sem4spi"
-                                                       onchange="func(this.value,'sem4per');"  placeholder="Semester 4 SPI"/>
+                                                       onchange="func(this.value,'sem4per');"
+                                                       placeholder="Semester 4 SPI"/>
                                             </div>
                                             <div class="col-6">
                                                 <input type="number" name="sem4per" id="sem4per"
@@ -416,7 +418,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="number" name="sem5spi" id="sem5spi"
-                                                       onchange="func(this.value,'sem5per');"  placeholder="Semester 5 SPI"/>
+                                                       onchange="func(this.value,'sem5per');"
+                                                       placeholder="Semester 5 SPI"/>
                                             </div>
                                             <div class="col-6">
                                                 <input type="number" name="sem5per" id="sem5per"
@@ -427,7 +430,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <input type="number" name="sem6spi" id="sem6spi"
-                                                       onchange="func(this.value,'sem6per');"   placeholder="Semester 6 SPI"/>
+                                                       onchange="func(this.value,'sem6per');"
+                                                       placeholder="Semester 6 SPI"/>
                                             </div>
                                             <div class="col-6">
                                                 <input type="number" name="sem6per" id="sem6per"
@@ -496,7 +500,7 @@
 
                                         <label style="font-family: FontAwesome;">Upload Resume</label>
                                         <br>
-                                        <input type="file" name="file" />
+                                        <input type="file" name="file"/>
 
 
                                         <label style="font-family: FontAwesome;">Declaration -All the above shared
@@ -516,7 +520,7 @@
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous"
                                            value="Previous"/>
-                                    <input  type="submit" name="make_payment" class="next action-button"
+                                    <input type="submit" name="make_payment" class="next action-button"
                                            value="Submit"/>
                                 </fieldset>
                                 {{--                                <fieldset>--}}
@@ -543,9 +547,8 @@
         </div>
     </div>
     <script type="text/javascript">
-        function  func(x,y)
-        {
-            document.getElementById(y).value=(x-0.5)*10;
+        function func(x, y) {
+            document.getElementById(y).value = (x - 0.5) * 10;
         }
     </script>
 
