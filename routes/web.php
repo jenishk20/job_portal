@@ -34,9 +34,9 @@ Route::get('/admin/addCompany', [\App\Http\Controllers\AdminController::class, '
 Route::post('/admin/addCompany/confirm', [\App\Http\Controllers\AdminController::class, 'confirmCompany']);
 Route::get('/admin/review', [\App\Http\Controllers\AdminController::class, 'review']);
 Route::post('/admin/review/confirm', [\App\Http\Controllers\AdminController::class, 'confirm']);
-Route::get('/admin/applicants',[\App\Http\Controllers\AdminController::class,'application']);
-Route::post('/admin/applicants/fetch',[\App\Http\Controllers\AdminController::class,'applicants']);
-
+Route::get('/admin/applicants', [\App\Http\Controllers\AdminController::class, 'application']);
+Route::post('/admin/applicants/fetch', [\App\Http\Controllers\AdminController::class, 'applicants']);
+Route::post('/admin/applicants/update', [\App\Http\Controllers\AdminController::class, 'dd']);
 
 
 //Change Password
@@ -62,10 +62,6 @@ Route::post(
 );
 
 
-
-
-
-
 //Student Routes
 
 Route::get('/student/oncampus', [\App\Http\Controllers\StudentController::class, 'show']);
@@ -73,8 +69,8 @@ Route::get('/student/profile', [\App\Http\Controllers\StudentController::class, 
 Route::post('/student/profile/confirm', [\App\Http\Controllers\StudentController::class, 'index']);
 Route::get('/student/oncampus/{id}', [\App\Http\Controllers\StudentController::class, 'preview']);
 
-Route::post('/student/oncampus/apply/{id}',[\App\Http\Controllers\StudentController::class,'apply']);
+Route::post('/student/oncampus/apply/{id}', [\App\Http\Controllers\StudentController::class, 'apply']);
 
 
 
-Route::post('/admin/applicants/update',[\App\Http\Controllers\AdminController::class,'dd']);
+

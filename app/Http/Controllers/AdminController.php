@@ -129,22 +129,40 @@ class AdminController extends Controller
 
     public function dd(Request $request)
     {
-        $sec=$request->get('select');
-        $rej=$request->get('reject');
+        $sec = $request->get('select');
+        $rej = $request->get('reject');
 
-       if($sec)
-       {
-           $app=applications::query()->select()->where('id','=',$sec)->get();
-           $app[0]->status='Selected';
-           $app[0]->save();
-           return back()->with('success', 'Updated');
-       }
-       else
-       {
-           $app=applications::query()->select()->where('id','=',$rej)->get();
-           $app[0]->status='Rejected';
-           $app[0]->save();
-           return back()->with('success', 'Updated');
-       }
+        if ($sec) {
+            $app = applications::query()->select()->where('id', '=', $sec)->get();
+            $cn = $app[0]->company_name;
+            $jr = $app[0]->job_role;
+            $roll = $app[0]->rollno;
+            $company = Company::query()->select()->where('company_name', '=', $cn)
+                ->where('job_role', '=', $jr)->get();
+            //dd($app);
+            //dd($company[0]->CTC);
+            $student = Student::query()->select()->where('roll_no', '=', $roll)->get();
+            // dd($student);
+            if ($company[0]->CTC > 12) {
+                $student[0]->attempts = "0";
+                $student[0]->save();
+
+            } else if ($company[0]->CTC > 7) {
+                $student[0]->attempts = "2";
+                $student[0]->save();
+            } else {
+                $student[0]->attempts = "2";
+                $student[0]->save();
+            }
+
+            $app[0]->status = 'Selected';
+            $app[0]->save();
+            return back()->with('success', 'Updated');
+        } else {
+            $app = applications::query()->select()->where('id', '=', $rej)->get();
+            $app[0]->status = 'Rejected';
+            $app[0]->save();
+            return back()->with('success', 'Updated');
+        }
     }
 }

@@ -114,14 +114,15 @@ class StudentController extends Controller
     {
         $companies = Company::query()->select()->get();
         $user = auth()->user();
-        $students=Student::query()->select()->where('primary_mail_id','=',$user->email)->get();
+        $students = Student::query()->select()->where('primary_mail_id', '=', $user->email)->get();
 //        if($students->isEmpty())
 //        {
 //            return view('student.profile');
 //        }
+//        dd($students);
         $applied = [];
         for ($i = 0; $i < count($companies); $i++) {
-            $app = applications::query()->select()->where('rollno', '=', $user->email)->
+            $app = applications::query()->select()->where('rollno', '=',$students[0]->roll_no)->
             where('company_name', '=', $companies[$i]->company_name)->get();
             if (!$app->isEmpty())
                 $applied[$i] = true;
@@ -132,7 +133,7 @@ class StudentController extends Controller
         //dd($applied);
 //        $app=applications::query()->select()->where('rollno','=',$user->email)->
 //        where('company_name','=',$companies[0]->company_name)->get();
-        return view('student.show', compact('companies', 'applied','students'));
+        return view('student.show', compact('companies', 'applied', 'students'));
     }
 
     public function show1()
@@ -156,17 +157,23 @@ class StudentController extends Controller
     public function apply($id)
     {
         //dd($id);
-        $user = auth()->user();
+        $auth_user = auth()->user();
+
+        $mail = $auth_user->email;
+
+        $user = Student::query()->select()->where('primary_mail_id', '=', $mail)->get();
+//        dd($user);
         $company = Company::query()->select()->where('id', '=', $id)->get();
 
-        $sql = applications::query()->select()->where('rollno', '=', $user->email)->
-        where('company_name', '=', $company[0]->company_name)->get();
-//        dd($sql);
+        $sql = applications::query()->select()->where('rollno', '=', $user[0]->roll_no)->
+        where('company_name', '=', $company[0]->company_name)->
+        where('job_role', '=', $company[0]->job_role)->get();
+        // dd($sql);
         if ($sql->isEmpty()) {
             $app = new applications();
-            $app->rollno = $user->email;
+            $app->rollno = $user[0]->roll_no;
             $app->company_name = $company[0]->company_name;
-            $app->job_role=$company[0]->job_role;
+            $app->job_role = $company[0]->job_role;
             $app->status = 'pending';
             $app->save();
 

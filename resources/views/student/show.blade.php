@@ -72,15 +72,24 @@
 
                         </td>
                         <td>
+{{--                            {{dd($students)}}--}}
                             {{--                            {{dd($app[0]->status)}}--}}
                             @if($students->isEmpty())
                                 <button type="submit" class="btn btn-info"
                                         disabled>Make Profile First
                                 </button>
 
+                            @elseif($students[0]->attempts=='0')
+                                <button type="submit" class="btn btn-info"
+                                        disabled>You are out of process
+                                </button>
+                            @elseif($students[0]->attempts=='2')
+                                <button type="submit" class="btn btn-info"
+                                >You have 2 attempts
+                                </button>
                             @elseif($applied[$i])
                                 <button type="submit" class="btn btn-info"
-                                        disabled>You have applied
+                                >You have already applied
                                 </button>
                             @else
                                 <button type="submit" class="btn btn-info"

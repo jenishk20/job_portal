@@ -84,7 +84,8 @@
                     // console.log(data[i].company_name);
                     if (data[i].company_name == cp && data[i].job_role == jr) {
                         for (var j = 0; j < profile.length; j++) {
-                            if (profile[j].primary_mail_id == data[i].rollno) {
+                            //    console.log(profile[j]);
+                            if (profile[j].roll_no == data[i].rollno) {
 
                                 var row = `<tr>
                          <td>${profile[j].roll_no}</td>
