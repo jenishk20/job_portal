@@ -115,24 +115,32 @@ class StudentController extends Controller
         $companies = Company::query()->select()->get();
         $user = auth()->user();
         $students = Student::query()->select()->where('primary_mail_id', '=', $user->email)->get();
-//        if($students->isEmpty())
-//        {
-//            return view('student.profile');
-//        }
-//        dd($students);
+        if($students->isEmpty())
+        {
+            return view('student.profile');
+        }
+
         $applied = [];
+        $selected=[];
         for ($i = 0; $i < count($companies); $i++) {
             $app = applications::query()->select()->where('rollno', '=',$students[0]->roll_no)->
             where('company_name', '=', $companies[$i]->company_name)->get();
+
             if (!$app->isEmpty())
                 $applied[$i] = true;
             else
                 $applied[$i] = false;
 
         }
-        //dd($applied);
-//        $app=applications::query()->select()->where('rollno','=',$user->email)->
-//        where('company_name','=',$companies[0]->company_name)->get();
+        $applications=applications::query()->select()->where('rollno','=',$students[0]->roll_no)->
+        where('status','=','Selected')->get();
+
+        dd($applications);
+//        $app=applications::query()->select()->where('rollno','=',$students[0]->roll_no)->
+//        where('company_name','=',$companies[0]->company_name)->
+//        where('job_role','=',$companies[0]->job_role)->
+//        where('status','=','Selected')->get();
+//        dd($app);
         return view('student.show', compact('companies', 'applied', 'students'));
     }
 

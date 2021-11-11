@@ -5,6 +5,23 @@
             @include('flash-message')
             @yield('content')
         </div>
+        @if($students[0]->attempts<3)
+            <div class="card">
+                <div class="card-header alert-info">
+                    Hi <b>{{$students[0]->first_name}}</b>, you have <b>{{$students[0]->attempts}}</b> upgradation
+                    attempts remaining.
+                </div>
+            </div>
+        @endif
+
+        @if(count($companies)==0)
+            <div class="card">
+                <div class="card-header alert-info">
+                    Hi <b>{{$students[0]->first_name}}</b>, There are no Oncampus Opportunities as of now.
+                    Tune in later.
+                </div>
+            </div>
+        @endif
         <table class="table table-striped table-hover text-dark" style="font-size:medium">
             <thead>
             <tr>
@@ -15,8 +32,9 @@
                 <th scope="col">Branches</th>
                 <th scope="col">CTC</th>
                 <th scope="col">CGPA</th>
+                <th scope="col">Deadline</th>
                 <th scope="col">Category</th>
-                <th scope="col">Job Description</th>
+                <th scope="col">JD</th>
 
                 <th scope="col">Apply</th>
             </tr>
@@ -33,6 +51,7 @@
                         <td>{{$companies[$i]->eligibility}}</td>
                         <td>{{$companies[$i]->CTC}}</td>
                         <td>{{$companies[$i]->minimum_CGPA}}</td>
+                        <td>{{$companies[$i]->last_date}}</td>
                         <td>
                             @if(intval($companies[$i]->CTC)<=7)
                                 {{'B'}}
@@ -72,28 +91,33 @@
 
                         </td>
                         <td>
-{{--                            {{dd($students)}}--}}
-                            {{--                            {{dd($app[0]->status)}}--}}
-                            @if($students->isEmpty())
-                                <button type="submit" class="btn btn-info"
-                                        disabled>Make Profile First
-                                </button>
 
-                            @elseif($students[0]->attempts=='0')
-                                <button type="submit" class="btn btn-info"
-                                        disabled>You are out of process
-                                </button>
+
+
+                            @if($students[0]->attempts=='0')
+                                <div class="row text-info">
+                                    Out of Process
+                                </div>
                             @elseif($students[0]->attempts=='2')
                                 <button type="submit" class="btn btn-info"
-                                >You have 2 attempts
+                                >Apply now
                                 </button>
+                                {{--                                @if(intval($companies[$i]->CTC)<=7)--}}
+
+                                {{--                                    <div class="row text-info">--}}
+                                {{--                                        You are out of process--}}
+                                {{--                                    </div>--}}
+                                {{--                                @elseif(intval($companies[$i]->CTC)<=12 && !$applied[$i])--}}
+                                {{--                                    <button type="submit" class="btn btn-info"--}}
+                                {{--                                    >Apply Now--}}
+                                {{--                                    </button>--}}
                             @elseif($applied[$i])
-                                <button type="submit" class="btn btn-info"
-                                >You have already applied
+                                <button type="submit" class="btn btn-info" disabled
+                                >Applied
                                 </button>
                             @else
                                 <button type="submit" class="btn btn-info"
-                                >Apply Now
+                                >Apply
                                 </button>
                             @endif
                             {{--                            <button type="submit" class="btn btn-info"--}}

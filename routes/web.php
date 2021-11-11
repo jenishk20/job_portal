@@ -72,5 +72,6 @@ Route::get('/student/oncampus/{id}', [\App\Http\Controllers\StudentController::c
 Route::post('/student/oncampus/apply/{id}', [\App\Http\Controllers\StudentController::class, 'apply']);
 
 
-
+//Chatting Routes
+Route::post('/home',[\App\Http\Controllers\ChatController::class,'index']);
 

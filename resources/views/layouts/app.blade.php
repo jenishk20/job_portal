@@ -29,12 +29,18 @@
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Gudea:ital,wght@0,400;0,700;1,400&display=swap%27');
+    </style>
+
 </head>
 <body>
-<div id="app">
+<div id="app" style="font-family: 'Gudea', sans-serif;">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -70,7 +76,10 @@
                             </li>
                         @endif
                     @else
+{{--                        {{dd(Auth::user()->email)}}--}}
+
                         @if(Auth::user()->email==env('WEBSITE_OWNER_EMAIL'))
+
                             <li class="nav-link">
                                 <a href="/admin">Admin Link</a>
                             </li>

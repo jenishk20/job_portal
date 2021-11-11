@@ -39,7 +39,7 @@ class AdminController extends Controller
         $arr = $request->get('eb');
         $arr = implode(',', $arr);
 
-
+        $date=$request->get('ldate');
         $filename = time() . '.' . $file->getClientOriginalExtension();
 
         $sql = Company::query()->select()->where('company_name', '=', $cname)->get();
@@ -54,7 +54,7 @@ class AdminController extends Controller
             $company->CTC = $ctc;
             $company->minimum_CGPA = $gpa;
             $company->job_description = $filename;
-
+            $company->last_date=$date;
             $company->save();
             return back()->with('success', 'Company Data Inserted Successfully');
         } else {
@@ -148,10 +148,10 @@ class AdminController extends Controller
                 $student[0]->save();
 
             } else if ($company[0]->CTC > 7) {
-                $student[0]->attempts = "2";
+                $student[0]->attempts = (string)number_format($student[0]->attempts)-1;
                 $student[0]->save();
             } else {
-                $student[0]->attempts = "2";
+                $student[0]->attempts = (string)number_format($student[0]->attempts)-1;
                 $student[0]->save();
             }
 

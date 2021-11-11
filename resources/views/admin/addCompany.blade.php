@@ -43,34 +43,7 @@
                                 <option value="ME">ME</option>
 
                             </select>
-                            {{--                            <div class="form-check form-check-inline">--}}
-                            {{--                                <input class="form-check-input" type="checkbox" id="i1" value="CSE">--}}
-                            {{--                                <label class="form-check-label" for="i1">CSE</label>--}}
-                            {{--                            </div>--}}
-                            {{--                            <div class="form-check form-check-inline">--}}
-                            {{--                                <input class="form-check-input" type="checkbox" id="i2" value="EC">--}}
-                            {{--                                <label class="form-check-label" for="i2">EC</label>--}}
-                            {{--                            </div>--}}
-                            {{--                            <div class="form-check form-check-inline">--}}
-                            {{--                                <input class="form-check-input" type="checkbox" id="i3" value="IC">--}}
-                            {{--                                <label class="form-check-label" for="i3">IC</label>--}}
-                            {{--                            </div>--}}
-                            {{--                            <div class="form-check form-check-inline">--}}
-                            {{--                                <input class="form-check-input" type="checkbox" id="i4" value="Chemical">--}}
-                            {{--                                <label class="form-check-label" for="i4">CH</label>--}}
-                            {{--                            </div>--}}
-                            {{--                            <div class="form-check form-check-inline">--}}
-                            {{--                                <input class="form-check-input" type="checkbox" id="i5" value="Civil">--}}
-                            {{--                                <label class="form-check-label" for=i5">CL</label>--}}
-                            {{--                            </div>--}}
-                            {{--                            <div class="form-check form-check-inline">--}}
-                            {{--                                <input class="form-check-input" type="checkbox" id="i6" value="Electrical">--}}
-                            {{--                                <label class="form-check-label" for="i6">EE</label>--}}
-                            {{--                            </div>--}}
-                            {{--                            <div class="form-check form-check-inline">--}}
-                            {{--                                <input class="form-check-input" type="checkbox" id="i7" value="Mechanical">--}}
-                            {{--                                <label class="form-check-label" for="i7">ME</label>--}}
-                            {{--                            </div>--}}
+
 
                         </div>
                     </div>
@@ -86,6 +59,13 @@
                         <label for="mcgpa" class="col-4 col-form-label">Minimum CGPA Required</label>
                         <div class="col-8">
                             <input id="mcgpa" name="mcgpa" placeholder="Minimum CGPA" type="text"
+                                   class="form-control" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ldate" class="col-4 col-form-label">Deadline</label>
+                        <div class="col-8">
+                            <input id="ldate" name="ldate"  type="datetime-local"
                                    class="form-control" required="required">
                         </div>
                     </div>
