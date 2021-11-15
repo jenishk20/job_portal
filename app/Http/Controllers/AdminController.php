@@ -134,6 +134,7 @@ class AdminController extends Controller
 
         if ($sec) {
             $app = applications::query()->select()->where('id', '=', $sec)->get();
+
             $cn = $app[0]->company_name;
             $jr = $app[0]->job_role;
             $roll = $app[0]->rollno;

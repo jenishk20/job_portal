@@ -29,7 +29,8 @@ class HomeController extends Controller
     {
         $sql=Chat::query()->select()->get();
         $user=User::query()->select()->get();
-        return view('home',compact('sql','user'));
+        $users=User::all();
+        return view('discussion',compact('sql','user','users'));
     }
     public function changePassForm(){
         return view('changePassword');

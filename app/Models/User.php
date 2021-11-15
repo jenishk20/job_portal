@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,6 +38,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function isOnline()
+    {
+        return Cache::has('user-is-online'.$this->id);
+    }
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

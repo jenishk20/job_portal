@@ -109,7 +109,20 @@ class StudentController extends Controller
             return back()->with('info', 'Data Already Exists');
         }
     }
+    private  function calc($x)
+    {
+        $maxic='';
+        if($x==0)
+            return  $maxic;
+        if($x<7)
+            $maxic='B';
+        else if($x>=7 && $x<=12)
+            $maxic='A';
+        else
+            $maxic='A+';
 
+        return  $maxic;
+    }
     public function show()
     {
         $companies = Company::query()->select()->get();
@@ -122,26 +135,35 @@ class StudentController extends Controller
 
         $applied = [];
         $selected=[];
+
+        $maxi=0;
         for ($i = 0; $i < count($companies); $i++) {
             $app = applications::query()->select()->where('rollno', '=',$students[0]->roll_no)->
             where('company_name', '=', $companies[$i]->company_name)->get();
-
+            $applications=applications::query()->select()->where('rollno','=',$students[0]->roll_no)->
+            where('status','=','Selected')->where('company_name', '=', $companies[$i]->company_name)->get();
             if (!$app->isEmpty())
                 $applied[$i] = true;
             else
                 $applied[$i] = false;
 
-        }
-        $applications=applications::query()->select()->where('rollno','=',$students[0]->roll_no)->
-        where('status','=','Selected')->get();
+            if(!$applications->isEmpty()) {
+                $selected[$i] = true;
+                $maxi=max($maxi,$companies[$i]->CTC);
+            }
+            else
+                $selected[$i]=false;
 
-        dd($applications);
-//        $app=applications::query()->select()->where('rollno','=',$students[0]->roll_no)->
-//        where('company_name','=',$companies[0]->company_name)->
-//        where('job_role','=',$companies[0]->job_role)->
-//        where('status','=','Selected')->get();
-//        dd($app);
-        return view('student.show', compact('companies', 'applied', 'students'));
+            $companies[$i]->cat=$this->calc($companies[$i]->CTC);
+
+
+        }
+
+
+
+
+        $maxic=$this->calc($maxi);
+        return view('student.show', compact('companies', 'applied', 'students','selected','maxic'));
     }
 
     public function show1()
@@ -165,6 +187,7 @@ class StudentController extends Controller
     public function apply($id)
     {
         //dd($id);
+
         $auth_user = auth()->user();
 
         $mail = $auth_user->email;
@@ -176,7 +199,7 @@ class StudentController extends Controller
         $sql = applications::query()->select()->where('rollno', '=', $user[0]->roll_no)->
         where('company_name', '=', $company[0]->company_name)->
         where('job_role', '=', $company[0]->job_role)->get();
-        // dd($sql);
+
         if ($sql->isEmpty()) {
             $app = new applications();
             $app->rollno = $user[0]->roll_no;

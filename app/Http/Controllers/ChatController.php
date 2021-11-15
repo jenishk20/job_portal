@@ -23,9 +23,9 @@ class ChatController extends Controller
         $chat->save();
 
         $sql=Chat::query()->select()->get();
-
+        $users=User::all();
        $user=User::query()->select()->get();
-        return view('home',compact('sql','user'));
+        return view('discussion',compact('sql','user','users'));
 
     }
 }

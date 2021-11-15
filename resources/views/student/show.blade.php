@@ -5,6 +5,7 @@
             @include('flash-message')
             @yield('content')
         </div>
+
         @if($students[0]->attempts<3)
             <div class="card">
                 <div class="card-header alert-info">
@@ -22,11 +23,53 @@
                 </div>
             </div>
         @endif
-        <table class="table table-striped table-hover text-dark" style="font-size:medium">
+        <div class="text-center font-weight-bolder mt-3" style="font-size: large">Selections</div>
+        <table class=" text-center table table-striped table-hover text-dark" style="font-size:medium">
             <thead>
             <tr>
 
-                <th scope="col">No.</th>
+
+                <th scope="col">Company</th>
+                <th scope="col">Role</th>
+
+                <th scope="col">CTC</th>
+
+                <th scope="col">Category</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+
+            @for($i=0;$i<count($selected);$i++)
+                @if($selected[$i])
+                    <tr>
+
+                        <td>{{$companies[$i]->company_name}}</td>
+                        <td>{{$companies[$i]->job_role}}</td>
+                        <td>{{$companies[$i]->CTC}}</td>
+                        <td>
+                            @if(intval($companies[$i]->CTC)<=7)
+                                {{'B'}}
+                            @elseif(intval($companies[$i]->CTC)<=12)
+                                {{'A'}}
+                            @else
+                                {{'A+'}}
+                            @endif
+
+                        </td>
+                    </tr>
+                @endif
+            @endfor
+            </tbody>
+
+        </table>
+        <div class="text-center font-weight-bolder mt-5" style="font-size: large">Other Opportunities</div>
+        <table class="mt-3 table table-striped table-hover text-dark" style="font-size:medium">
+            <thead>
+            <tr>
+
+
                 <th scope="col">Company</th>
                 <th scope="col">Role</th>
                 <th scope="col">Branches</th>
@@ -40,18 +83,36 @@
             </tr>
             </thead>
             <tbody>
-
             @for($i=0;$i<count($companies);$i++)
+
+                @if($selected[$i])
+
+
+                    @continue
+                @endif
+                @if($maxic=='A+')
+                    @continue
+                @elseif($maxic=='A' and ($companies[$i]->cat=='B' or $companies[$i]->cat=='A' ))
+                    @continue
+                @elseif($maxic=='B' and $companies[$i]->cat=='B')
+                    @continue
+
+
+
+                @endif
+
                 <form action="/student/oncampus/apply/{{$companies[$i]->id}}" method="post">
                     @csrf
                     <tr>
-                        <th scope="row">{{$i+1}}</th>
+
+
                         <td>{{$companies[$i]->company_name}}</td>
                         <td>{{$companies[$i]->job_role}}</td>
                         <td>{{$companies[$i]->eligibility}}</td>
                         <td>{{$companies[$i]->CTC}}</td>
                         <td>{{$companies[$i]->minimum_CGPA}}</td>
-                        <td>{{$companies[$i]->last_date}}</td>
+                        <td>  {{date('M',strtotime($companies[$i]->last_date))}} {{date('j',strtotime($companies[$i]->last_date))}}
+                            || {{date("h:i A", strtotime($companies[$i]->last_date))}} </td>
                         <td>
                             @if(intval($companies[$i]->CTC)<=7)
                                 {{'B'}}
@@ -93,37 +154,32 @@
                         <td>
 
 
-
-                            @if($students[0]->attempts=='0')
-                                <div class="row text-info">
-                                    Out of Process
-                                </div>
-                            @elseif($students[0]->attempts=='2')
-                                <button type="submit" class="btn btn-info"
-                                >Apply now
+                            @if($selected[$i])
+                                <button class="btn btn-info disabled">
+                                    Selected
                                 </button>
-                                {{--                                @if(intval($companies[$i]->CTC)<=7)--}}
-
-                                {{--                                    <div class="row text-info">--}}
-                                {{--                                        You are out of process--}}
-                                {{--                                    </div>--}}
-                                {{--                                @elseif(intval($companies[$i]->CTC)<=12 && !$applied[$i])--}}
-                                {{--                                    <button type="submit" class="btn btn-info"--}}
-                                {{--                                    >Apply Now--}}
-                                {{--                                    </button>--}}
+                            @elseif($students[0]->attempts=='0')
+                                <div class="row text-info">
+                                    No attempts remain
+                                </div>
                             @elseif($applied[$i])
                                 <button type="submit" class="btn btn-info" disabled
                                 >Applied
                                 </button>
+                            @elseif($students[0]->attempts=='2')
+                                <button type="submit" class="btn btn-info"
+                                >Apply now
+                                </button>
+
+
                             @else
                                 <button type="submit" class="btn btn-info"
                                 >Apply
                                 </button>
                             @endif
-                            {{--                            <button type="submit" class="btn btn-info"--}}
-                            {{--                            >Apply Now--}}
-                            {{--                            </button>--}}
+
                         </td>
+
                     </tr>
                 </form>
             @endfor

@@ -43,9 +43,9 @@
 <div id="app" style="font-family: 'Gudea', sans-serif;">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-{{--                {{ config('app.name', 'Laravel') }}--}}
-                III Cell - Nirma University
+            <a class="navbar-brand" href="{{ url('/home') }}">
+                {{--                {{ config('app.name', 'Laravel') }}--}}
+                III Cell - NU
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -56,8 +56,34 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav ml-4">
+                    @if(Auth::user()->email==env('WEBSITE_OWNER_EMAIL'))
 
+
+                            <a href="{{url('/admin')}}" style="font-size: large" class="text-dark nav-link">
+                                {{__("Admin Routes")}}
+                            </a>
+
+                    @endif
+                </ul>
+                <ul class="navbar-nav ml-4">
+                    <a class="nav-link " href="{{url('/discussion')}}">
+
+                        {{ __("Discussion Forum") }}
+                    </a>
+                </ul>
+                <ul class="navbar-nav ml-4">
+                    <a class="nav-link " href="{{url('/student/profile')}}">
+
+                        {{ __("Make Profile") }}
+                    </a>
+                </ul>
+
+                <ul class="navbar-nav ml-4">
+                    <a class="nav-link " href="{{url('/student/oncampus')}}">
+
+                        {{ __("Oncampus Opportunities") }}
+                    </a>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -76,14 +102,10 @@
                             </li>
                         @endif
                     @else
-{{--                        {{dd(Auth::user()->email)}}--}}
+                        {{--                        {{dd(Auth::user()->email)}}--}}
 
-                        @if(Auth::user()->email==env('WEBSITE_OWNER_EMAIL'))
 
-                            <li class="nav-link">
-                                <a href="/admin">Admin Link</a>
-                            </li>
-                        @endif
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -101,15 +123,11 @@
                                     @csrf
                                 </form>
 
-                                <a class="dropdown-item" href="{{url('/student/oncampus')}}">
 
-                                    {{ __("Oncampus Opportunities") }}
-                                </a>
+                                {{--                                <a class="dropdown-item" href="{{url('/student/profile')}}">--}}
 
-                                <a class="dropdown-item" href="{{url('/student/profile')}}">
-
-                                    {{ __("Make Profile") }}
-                                </a>
+                                {{--                                    {{ __("Make Profile") }}--}}
+                                {{--                                </a>--}}
 
                                 <a class="dropdown-item" href="{{url('/changepass')}}">
 
