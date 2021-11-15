@@ -133,24 +133,24 @@
     </form>
 
 
-{{--    <div class="row mt-3">--}}
-{{--        <div class="col-lg-3 text-center">--}}
-{{--            <table class="table table-dark border cool-table">--}}
-{{--                <thead>--}}
-{{--                <th class="border-primary">--}}
-{{--                    Users online in the last 1 minute--}}
-{{--                </th>--}}
-{{--                </thead>--}}
-{{--                @foreach($users as $user)--}}
-{{--                    @if ($user->isOnline())--}}
+    <div class="row mt-3">
+        <div class="col-lg-3 text-center">
+            <table class="table table-hover border ">
+                <thead>
+                <th class="border-primary">
+                    Users online in the last 1 minute
+                </th>
+                </thead>
+                @foreach($users as $user)
+                    @if ($user->isOnline())
 
-{{--                        <tr>--}}
-{{--                            <td>{{$user->name}}</td>--}}
-{{--                        </tr>--}}
-{{--                    @endif--}}
-{{--                @endforeach--}}
-{{--            </table>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+                        <tr>
+                            <td>{{$user->name}}</td>
+                        </tr>
+                    @endif
+                @endforeach
+            </table>
+        </div>
+    </div>
 
 @endsection

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\applications;
 use App\Models\Chat;
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,6 +27,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public  function home()
+    {
+
+        $selected=applications::query()->select('rollno')->get();
+
+        
+        return view('home');
+    }
     public function index()
     {
         $sql=Chat::query()->select()->get();

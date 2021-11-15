@@ -25,7 +25,38 @@
                             </div>
                         @endif
 
-                        {{ __('You are logged in! Check On-Campus Opportunities') }}
+                        {{ __('You are logged in successfully! ')}}
+                        <br>
+                        <p class="mt-3" style="font-weight: bolder">
+                            You are requested to read the placement
+                            policy first and then apply to the
+                            opportunities
+                        </p>
+
+                        <button type="button" class="btn btn-info" data-toggle="modal"
+                                data-target="#myModal">Preview
+                        </button>
+
+                        <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{--                                        {{var_dump(  $companies[$i]->job_description)}}--}}
+                                        <embed src="/assets/policy.pdf" frameborder="0"
+                                               width="100%" height="400px">
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

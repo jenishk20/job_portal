@@ -56,16 +56,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav ml-4">
-                    @if(Auth::user()->email==env('WEBSITE_OWNER_EMAIL'))
 
-
-                            <a href="{{url('/admin')}}" style="font-size: large" class="text-dark nav-link">
-                                {{__("Admin Routes")}}
-                            </a>
-
-                    @endif
-                </ul>
                 <ul class="navbar-nav ml-4">
                     <a class="nav-link " href="{{url('/discussion')}}">
 
@@ -105,6 +96,16 @@
                         {{--                        {{dd(Auth::user()->email)}}--}}
 
 
+                        <ul class="navbar-nav ml-auto">
+                            @if(Auth::user()->email==env('WEBSITE_OWNER_EMAIL'))
+
+
+                                <a href="{{url('/admin')}}" style="font-size: large" class="text-dark nav-link">
+                                    {{__("Admin Routes")}}
+                                </a>
+
+                            @endif
+                        </ul>
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

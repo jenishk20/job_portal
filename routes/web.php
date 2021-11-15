@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 
 
 //Admin Routes
@@ -64,17 +64,17 @@ Route::post(
 
 //Student Routes
 
-Route::get('/student/oncampus', [\App\Http\Controllers\StudentController::class, 'show']);
-Route::get('/student/profile', [\App\Http\Controllers\StudentController::class, 'show1']);
-Route::post('/student/profile/confirm', [\App\Http\Controllers\StudentController::class, 'index']);
-Route::get('/student/oncampus/{id}', [\App\Http\Controllers\StudentController::class, 'preview']);
+Route::get('/student/oncampus', [\App\Http\Controllers\StudentController::class, 'show'])->middleware('auth');
+Route::get('/student/profile', [\App\Http\Controllers\StudentController::class, 'show1'])->middleware('auth');
+Route::post('/student/profile/confirm', [\App\Http\Controllers\StudentController::class, 'index'])->middleware('auth');
+Route::get('/student/oncampus/{id}', [\App\Http\Controllers\StudentController::class, 'preview'])->middleware('auth');
 
-Route::post('/student/oncampus/apply/{id}', [\App\Http\Controllers\StudentController::class, 'apply']);
+Route::post('/student/oncampus/apply/{id}', [\App\Http\Controllers\StudentController::class, 'apply'])->middleware('auth');
 
 
 
 
 
 //Chatting Routes
-Route::get('/discussion',[\App\Http\Controllers\HomeController::class,'index']);
-Route::post('/discussion',[\App\Http\Controllers\ChatController::class,'index']);
+Route::get('/discussion',[\App\Http\Controllers\HomeController::class,'index'])->middleware(\App\Http\Middleware\LastUserActivity::class);
+Route::post('/discussion',[\App\Http\Controllers\ChatController::class,'index'])->middleware(\App\Http\Middleware\LastUserActivity::class);
