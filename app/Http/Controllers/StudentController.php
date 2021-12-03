@@ -212,4 +212,9 @@ class StudentController extends Controller
         }
 
     }
+
+    public function viewProfile()
+    {
+        return view('student.viewProfile');
+    }
 }

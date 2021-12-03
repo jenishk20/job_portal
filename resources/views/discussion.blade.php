@@ -46,7 +46,7 @@
 
                         </div>
 
-                        <div id="scroll" class="card-body p-4 mb-3" style="height: 500px; overflow:auto">
+                        <div id="scrollToBottom" class="card-body p-4 mb-3" style="height: 500px; overflow:auto">
                             @for($i=0;$i<count($sql);$i++)
 
                                 @if($sql[$i]->user_id==auth()->user()->id)
@@ -162,9 +162,10 @@
         </div>
     </div>
 <script>
-    var element = document.getElementById("scroll");
-    console.log(element);
-    element.scrollIntoView();
-
+    function scrollToBottom (id) {
+        var div = document.getElementById(id);
+        div.scrollTop = div.scrollHeight - div.clientHeight;
+    }
+    scrollToBottom("scrollToBottom");
 </script>
 @endsection

@@ -134,6 +134,10 @@
 
                                     {{ __("Change Password") }}
                                 </a>
+                                <a class="dropdown-item" href="{{url('/viewProfile')}}">
+
+                                    {{ __("View Profile") }}
+                                </a>
                             </div>
 
                         </li>
